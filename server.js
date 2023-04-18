@@ -57,7 +57,11 @@ const testPost = async () => {
 
 testPost();
 
-app.use("/", async (req, res) => {
+// const getterFunc = async(req, res) => {
+
+// }
+
+app.use("/players", async (req, res) => {
   try {
     const { sheets } = await authentication();
     const response = await sheets.spreadsheets.values.get({
