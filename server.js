@@ -5,7 +5,16 @@ const { google } = require("googleapis");
 const id = "18gnDk9yLRqjN4mk2eCP-Zu9BCt5vvv-3cgCCz7L7Z8w";
 
 const app = express();
-// app.use(express.json());
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  next();
+});
 
 const authentication = async () => {
   const auth = new google.auth.GoogleAuth({
@@ -26,7 +35,6 @@ const authentication = async () => {
 const testGet = async () => {
   try {
     const sheets = await authentication();
-
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: id,
       range: "gigs",
@@ -55,23 +63,52 @@ const testPost = async () => {
   }
 };
 
-testPost();
-
 // const getterFunc = async(req, res) => {
 
 // }
 
 app.use("/players", async (req, res) => {
   try {
-    const { sheets } = await authentication();
+    const sheets = await authentication();
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: id,
       range: "players",
     });
-    res.send(response.data);
+
+    const fullSpreadsheet = response.data.values;
+    const propsRow = fullSpreadsheet.shift();
+
+    const listOfPlayerObs = fullSpreadsheet.reduce((list, playerRow) => {
+      let playerOb = {};
+
+      for (let j = 0; j < propsRow.length; j++) {
+        playerOb[propsRow[j]] = playerRow[j];
+      }
+      list.push(playerOb);
+      return list;
+    }, []);
+
+    res.send(listOfPlayerObs);
   } catch (e) {
     console.log(e);
     res.status(500).send();
+  }
+});
+
+app.use("/playerGigs/:pid", async (req, res) => {
+  const playerId = req.params.pid;
+
+  try {
+    const sheets = await authentication();
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: id,
+      range: "playerGigs",
+    });
+
+    const playerGigsList = response.data.values;
+    
+  } catch (e) {
+    console.log(e);
   }
 });
 
