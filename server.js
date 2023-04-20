@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { google } = require("googleapis");
-const { connectors } = require("googleapis/build/src/apis/connectors");
+// const { connectors } = require("googleapis/build/src/apis/connectors");
 
 const playerRoutes = require('./routes/player-routes')
 
@@ -71,34 +71,6 @@ const testPost = async () => {
 // }
 
 app.use('/players', playerRoutes)
-
-// app.use("/players", async (req, res) => {
-//   try {
-//     const sheets = await authentication();
-//     const response = await sheets.spreadsheets.values.get({
-//       spreadsheetId: id,
-//       range: "players",
-//     });
-
-//     const fullSpreadsheet = response.data.values;
-//     const propsRow = fullSpreadsheet.shift();
-
-//     const listOfPlayerObs = fullSpreadsheet.reduce((list, playerRow) => {
-//       let playerOb = {};
-
-//       for (let j = 0; j < propsRow.length; j++) {
-//         playerOb[propsRow[j]] = playerRow[j];
-//       }
-//       list.push(playerOb);
-//       return list;
-//     }, []);
-
-//     res.send(listOfPlayerObs);
-//   } catch (e) {
-//     console.log(e);
-//     res.status(500).send();
-//   }
-// });
 
 app.use("/playerGigs/:pid", async (req, res) => {
   const playerId = req.params.pid;
