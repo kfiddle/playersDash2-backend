@@ -1,6 +1,9 @@
 const express = require("express");
 
 const { google } = require("googleapis");
+const { connectors } = require("googleapis/build/src/apis/connectors");
+
+const playerRoutes = require('./routes/player-routes')
 
 const id = "18gnDk9yLRqjN4mk2eCP-Zu9BCt5vvv-3cgCCz7L7Z8w";
 
@@ -67,33 +70,35 @@ const testPost = async () => {
 
 // }
 
-app.use("/players", async (req, res) => {
-  try {
-    const sheets = await authentication();
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: id,
-      range: "players",
-    });
+app.use('/players', playerRoutes)
 
-    const fullSpreadsheet = response.data.values;
-    const propsRow = fullSpreadsheet.shift();
+// app.use("/players", async (req, res) => {
+//   try {
+//     const sheets = await authentication();
+//     const response = await sheets.spreadsheets.values.get({
+//       spreadsheetId: id,
+//       range: "players",
+//     });
 
-    const listOfPlayerObs = fullSpreadsheet.reduce((list, playerRow) => {
-      let playerOb = {};
+//     const fullSpreadsheet = response.data.values;
+//     const propsRow = fullSpreadsheet.shift();
 
-      for (let j = 0; j < propsRow.length; j++) {
-        playerOb[propsRow[j]] = playerRow[j];
-      }
-      list.push(playerOb);
-      return list;
-    }, []);
+//     const listOfPlayerObs = fullSpreadsheet.reduce((list, playerRow) => {
+//       let playerOb = {};
 
-    res.send(listOfPlayerObs);
-  } catch (e) {
-    console.log(e);
-    res.status(500).send();
-  }
-});
+//       for (let j = 0; j < propsRow.length; j++) {
+//         playerOb[propsRow[j]] = playerRow[j];
+//       }
+//       list.push(playerOb);
+//       return list;
+//     }, []);
+
+//     res.send(listOfPlayerObs);
+//   } catch (e) {
+//     console.log(e);
+//     res.status(500).send();
+//   }
+// });
 
 app.use("/playerGigs/:pid", async (req, res) => {
   const playerId = req.params.pid;
@@ -105,8 +110,16 @@ app.use("/playerGigs/:pid", async (req, res) => {
       range: "playerGigs",
     });
 
-    const playerGigsList = response.data.values;
-    
+    const fullPlayerGigsList = response.data.values;
+    const gigsOfPlayer = fullPlayerGigsList.reduce((gigs, nextRow) => {
+      if (nextRow[1] === playerId) {
+        gigs.push(nextRow[2]);
+      }
+      return gigs;
+    }, []);
+
+    console.log(gigsOfPlayer);
+    console.log(playerId);
   } catch (e) {
     console.log(e);
   }
