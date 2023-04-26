@@ -66,35 +66,31 @@ const testPost = async () => {
   }
 };
 
-// const getterFunc = async(req, res) => {
-
-// }
-
 app.use('/players', playerRoutes)
 
-app.use("/playerGigs/:pid", async (req, res) => {
-  const playerId = req.params.pid;
+// app.use("/playerGigs/:pid", async (req, res) => {
+//   const playerId = req.params.pid;
 
-  try {
-    const sheets = await authentication();
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: id,
-      range: "playerGigs",
-    });
+//   try {
+//     const sheets = await authentication();
+//     const response = await sheets.spreadsheets.values.get({
+//       spreadsheetId: id,
+//       range: "playerGigs",
+//     });
 
-    const fullPlayerGigsList = response.data.values;
-    const gigsOfPlayer = fullPlayerGigsList.reduce((gigs, nextRow) => {
-      if (nextRow[1] === playerId) {
-        gigs.push(nextRow[2]);
-      }
-      return gigs;
-    }, []);
+//     const fullPlayerGigsList = response.data.values;
+//     const gigsOfPlayer = fullPlayerGigsList.reduce((gigs, nextRow) => {
+//       if (nextRow[1] === playerId) {
+//         gigs.push(nextRow[2]);
+//       }
+//       return gigs;
+//     }, []);
 
-    console.log(gigsOfPlayer);
-    console.log(playerId);
-  } catch (e) {
-    console.log(e);
-  }
-});
+//     console.log(gigsOfPlayer);
+//     console.log(playerId);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// });
 
 app.listen(5000, () => console.log("server is still running on 5000"));
