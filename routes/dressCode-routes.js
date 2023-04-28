@@ -22,7 +22,24 @@ router.get("/", async (req, res) => {
 router.get("/:gigId", async (req, res) => {
   try {
     const gigId = req.params.gigId;
-    console.log(gigId);
+    const fullGigs = await getter("gigs");
+
+    // const gigObs = sheetToObjects(fullGigs);
+    // const gig = gigObs.find((gig) => gig.id === gigId);
+    // const gigDress = gig.dress;
+
+    const gigDress = sheetToObjects(fullGigs).find(gig => gig.id === gigId).dress;
+
+    const fullDress = await getter("dressCodes");
+
+    const dressToReturn = fullDress.slice(1).reduce((dressDeets, nextRow) => {
+      if (nextRow[0] === gigDress) {
+        dressDeets.push(nextRow[1]);
+        dressDeets.push(nextRow[2]);
+      }
+      return dressDeets;
+    }, []);
+    res.send(dressToReturn);
   } catch (e) {
     console.log(e);
     res.status(500).send();
