@@ -3,7 +3,8 @@ const express = require("express");
 const { google } = require("googleapis");
 // const { connectors } = require("googleapis/build/src/apis/connectors");
 
-const playerRoutes = require('./routes/player-routes')
+const playerRoutes = require("./routes/player-routes");
+const dressCodeRoutes = require("./routes/dressCode-routes");
 
 const id = "18gnDk9yLRqjN4mk2eCP-Zu9BCt5vvv-3cgCCz7L7Z8w";
 
@@ -66,31 +67,7 @@ const testPost = async () => {
   }
 };
 
-app.use('/players', playerRoutes)
-
-// app.use("/playerGigs/:pid", async (req, res) => {
-//   const playerId = req.params.pid;
-
-//   try {
-//     const sheets = await authentication();
-//     const response = await sheets.spreadsheets.values.get({
-//       spreadsheetId: id,
-//       range: "playerGigs",
-//     });
-
-//     const fullPlayerGigsList = response.data.values;
-//     const gigsOfPlayer = fullPlayerGigsList.reduce((gigs, nextRow) => {
-//       if (nextRow[1] === playerId) {
-//         gigs.push(nextRow[2]);
-//       }
-//       return gigs;
-//     }, []);
-
-//     console.log(gigsOfPlayer);
-//     console.log(playerId);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// });
+app.use("/players", playerRoutes);
+app.use("/dress-codes", dressCodeRoutes);
 
 app.listen(5000, () => console.log("server is still running on 5000"));

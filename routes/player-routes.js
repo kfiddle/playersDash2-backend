@@ -38,7 +38,6 @@ router.get("/gigs-of-player/:pid", async (req, res) => {
       gigIdsOfPlayer.includes(gig.id)
     );
 
-    console.log(gigsOfPlayer);
     res.send(gigsOfPlayer);
   } catch (e) {
     console.log(e);
