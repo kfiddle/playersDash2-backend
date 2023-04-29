@@ -45,4 +45,16 @@ router.get("/gigs-of-player/:pid", async (req, res) => {
   }
 });
 
+router.get("/clear-row", async (req, res) => {
+  try {
+    const sheets = await authentication();
+    sheets.spreadsheets.values.clear({
+      spreadsheetId: id,
+      range: "playerGigs!14:14",
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;
