@@ -45,12 +45,23 @@ router.get("/gigs-of-player/:pid", async (req, res) => {
   }
 });
 
-router.get("/clear-row", async (req, res) => {
+router.get("/cancel-gig/:pid/:gigId", async (req, res) => {
+  const gigId = req.params.gigId;
+  const playerId = req.params.pid;
+
   try {
+    const allPlayerGigs = await getter("playerGigs");
+    let row;
+
+    for (let pg of allPlayerGigs) {
+      if (pg[1] === playerId && pg[2] === gigId)
+        row = allPlayerGigs.indexOf(pg) + 1;
+    }
+
     const sheets = await authentication();
     sheets.spreadsheets.values.clear({
       spreadsheetId: id,
-      range: "playerGigs!14:14",
+      range: `playerGigs!${row}:${row}`,
     });
   } catch (e) {
     console.log(e);
