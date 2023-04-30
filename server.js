@@ -73,4 +73,6 @@ app.use("/players", playerRoutes);
 app.use("/dress-codes", dressCodeRoutes);
 app.use("/library", libraryRoutes);
 
+require('dotenv').config()
+console.log(process.env) 
 app.listen(5000, () => console.log("server is still running on 5000"));
