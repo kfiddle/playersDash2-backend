@@ -1,4 +1,5 @@
-const authentication = require('./authentication');
+// const authentication = require('./authentication');
+const authentication = require('./.env');
 const id = "18gnDk9yLRqjN4mk2eCP-Zu9BCt5vvv-3cgCCz7L7Z8w";
 
 const getter = async (tab) => {

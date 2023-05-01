@@ -10,6 +10,10 @@ const id = "18gnDk9yLRqjN4mk2eCP-Zu9BCt5vvv-3cgCCz7L7Z8w";
 
 const app = express();
 
+// require("dotenv").config();
+// console.log(process.env)
+
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -22,7 +26,7 @@ app.use((req, res, next) => {
 
 const authentication = async () => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: "credentials.json",
+    keyFile: 'credentials',
     scopes: "https://www.googleapis.com/auth/spreadsheets",
   });
 
@@ -67,12 +71,8 @@ const testPost = async () => {
   }
 };
 
-
-
 app.use("/players", playerRoutes);
 app.use("/dress-codes", dressCodeRoutes);
 app.use("/library", libraryRoutes);
 
-require('dotenv').config()
-console.log(process.env) 
 app.listen(5000, () => console.log("server is still running on 5000"));
