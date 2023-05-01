@@ -28,7 +28,8 @@ app.use("/players", playerRoutes);
 app.use("/dress-codes", dressCodeRoutes);
 app.use("/library", libraryRoutes);
 
-app.listen(5000, () => console.log("server is still running on 5000"));
+app.listen(process.env.PORT || 5000);
+// app.listen(5000, () => console.log("server is still running on 5000"));
 
 // const authentication = async () => {
 //   const auth = new google.auth.GoogleAuth({
