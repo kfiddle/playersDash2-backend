@@ -24,55 +24,55 @@ app.use((req, res, next) => {
   next();
 });
 
-const authentication = async () => {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: 'credentials',
-    scopes: "https://www.googleapis.com/auth/spreadsheets",
-  });
-
-  const client = await auth.getClient();
-
-  const sheets = google.sheets({
-    version: "v4",
-    auth: client,
-  });
-
-  return sheets;
-};
-
-const testGet = async () => {
-  try {
-    const sheets = await authentication();
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: id,
-      range: "gigs",
-    });
-    console.log(response.data);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-// testGet();
-
-const testPost = async () => {
-  try {
-    const sheets = await authentication();
-    sheets.spreadsheets.values.append({
-      spreadsheetId: id,
-      range: "gigs",
-      valueInputOption: "USER_ENTERED",
-      resource: {
-        values: [["6", "2/8/2023", "Cirque", "Warner Theater"]],
-      },
-    });
-  } catch (e) {
-    console.log("error posting to our sheet");
-  }
-};
-
 app.use("/players", playerRoutes);
 app.use("/dress-codes", dressCodeRoutes);
 app.use("/library", libraryRoutes);
 
 app.listen(5000, () => console.log("server is still running on 5000"));
+
+// const authentication = async () => {
+//   const auth = new google.auth.GoogleAuth({
+//     keyFile: 'credentials',
+//     scopes: "https://www.googleapis.com/auth/spreadsheets",
+//   });
+
+//   const client = await auth.getClient();
+
+//   const sheets = google.sheets({
+//     version: "v4",
+//     auth: client,
+//   });
+
+//   return sheets;
+// };
+
+// const testGet = async () => {
+//   try {
+//     const sheets = await authentication();
+//     const response = await sheets.spreadsheets.values.get({
+//       spreadsheetId: id,
+//       range: "gigs",
+//     });
+//     console.log(response.data);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+
+// testGet();
+
+// const testPost = async () => {
+//   try {
+//     const sheets = await authentication();
+//     sheets.spreadsheets.values.append({
+//       spreadsheetId: id,
+//       range: "gigs",
+//       valueInputOption: "USER_ENTERED",
+//       resource: {
+//         values: [["6", "2/8/2023", "Cirque", "Warner Theater"]],
+//       },
+//     });
+//   } catch (e) {
+//     console.log("error posting to our sheet");
+//   }
+// };

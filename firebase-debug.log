@@ -1,0 +1,21 @@
+[debug] [2023-05-01T02:24:20.705Z] ----------------------------------------------------------------------
+[debug] [2023-05-01T02:24:20.707Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\user2020\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-05-01T02:24:20.708Z] CLI Version:   9.23.0
+[debug] [2023-05-01T02:24:20.708Z] Platform:      win32
+[debug] [2023-05-01T02:24:20.708Z] Node Version:  v18.13.0
+[debug] [2023-05-01T02:24:20.719Z] Time:          Sun Apr 30 2023 22:24:20 GMT-0400 (Eastern Daylight Time)
+[debug] [2023-05-01T02:24:20.720Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-01T02:24:20.728Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-01T02:24:20.728Z] > authorizing via signed-in user (kenjfiddle@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\user2020\CodeFiles\codeSmithPrep\playersDash2\backend
+
