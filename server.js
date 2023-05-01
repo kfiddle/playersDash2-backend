@@ -10,10 +10,6 @@ const id = "18gnDk9yLRqjN4mk2eCP-Zu9BCt5vvv-3cgCCz7L7Z8w";
 
 const app = express();
 
-// require("dotenv").config();
-// console.log(process.env)
-
-
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -29,6 +25,7 @@ app.use("/dress-codes", dressCodeRoutes);
 app.use("/library", libraryRoutes);
 
 app.listen(process.env.PORT || 5000);
+
 // app.listen(5000, () => console.log("server is still running on 5000"));
 
 // const authentication = async () => {
