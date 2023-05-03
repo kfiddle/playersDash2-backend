@@ -8,6 +8,7 @@ const libraryRoutes = require("./routes/library-routes");
 
 const id = "18gnDk9yLRqjN4mk2eCP-Zu9BCt5vvv-3cgCCz7L7Z8w";
 
+require('dotenv').config();
 const app = express();
 
 app.use((req, res, next) => {
@@ -23,6 +24,8 @@ app.use((req, res, next) => {
 app.use("/players", playerRoutes);
 app.use("/dress-codes", dressCodeRoutes);
 app.use("/library", libraryRoutes);
+
+console.log(process.env);
 
 app.listen(process.env.PORT || 5000);
 
