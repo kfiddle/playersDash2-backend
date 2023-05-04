@@ -27,7 +27,7 @@ app.use("/library", libraryRoutes);
 
 console.log(process.env);
 
-app.listen(process.env.PORT || 5000, ()=> console.log('we are golden'));
+app.listen(process.env.PORT || 5000);
 
 // app.listen(5000, () => console.log("server is still running on 5000"));
 
