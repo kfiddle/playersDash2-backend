@@ -10,12 +10,9 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-
-    // const fullSpreadsheet = await getter("players");
-    // const listOfPlayerObs = sheetToObjects(fullSpreadsheet);
-    // res.send(listOfPlayerObs);
-    res.send('players stuff here')
-
+    const fullSpreadsheet = await getter("players");
+    const listOfPlayerObs = sheetToObjects(fullSpreadsheet);
+    res.send(listOfPlayerObs);
   } catch (e) {
     console.log(e);
     res.status(500).send();
