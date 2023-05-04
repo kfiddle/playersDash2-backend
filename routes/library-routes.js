@@ -9,8 +9,7 @@ router.get("/", async (req, res) => {
     // const fullSpreadsheet = await getter("library");
     // const libraryObs = sheetToObjects(fullSpreadsheet);
     // res.send(libraryObs);
-    res.send('we made it')
-    
+    res.send(process.env.TYPE);
   } catch (e) {
     console.log(e);
     res.status(500).send();
