@@ -25,7 +25,6 @@ app.use("/players", playerRoutes);
 app.use("/dress-codes", dressCodeRoutes);
 app.use("/library", libraryRoutes);
 
-console.log(process.env);
 
 app.listen(process.env.PORT || 5000);
 
