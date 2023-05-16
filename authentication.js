@@ -2,11 +2,12 @@ const { Buffer } = require("node:buffer");
 const { google } = require("googleapis");
 require("dotenv").config();
 
+
 const creds = {
   type: "service_account",
   project_id: "playersdash",
-  private_key_id: process.env.PRIVATE_KEY_ID,
-  private_key: process.env.PRIVATE_KEY,
+  private_key_id: process.env.GOOGLE_CREDENTIALS.PRIVATE_KEY_ID,
+  private_key: process.env.GOOGLE_CREDENTIALS.PRIVATE_KEY,
   client_email: "players-dashboard@playersdash.iam.gserviceaccount.com",
   client_id: "102575101957035391542",
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
